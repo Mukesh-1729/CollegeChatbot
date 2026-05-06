@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.env
+
+# Data (regeneratable)
+data/
+vector_db/
+
+# OS files
+.DS_Store
+Thumbs.db

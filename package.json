@@ -1,0 +1,17 @@
+{
+  "name": "college-chatbot",
+  "version": "1.0.0",
+  "description": "BVRIT College Enquiry Chatbot with RAG Architecture",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6"
+  },
+  "keywords": ["chatbot", "college", "RAG", "BVRIT"],
+  "author": "",
+  "license": "MIT"
+}

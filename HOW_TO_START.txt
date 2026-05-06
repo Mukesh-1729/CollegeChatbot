@@ -1,0 +1,199 @@
+============================================================
+  BVRIT College Chatbot — How to Start the Project
+============================================================
+
+PROJECT PATH: c:\Users\obban\OneDrive\Desktop\chatbot
+
+
+============================================================
+  STEP 1: Open Terminal & Navigate to Project Folder
+============================================================
+
+    cd c:\Users\obban\OneDrive\Desktop\chatbot
+
+
+============================================================
+  STEP 2: Activate Python Virtual Environment
+============================================================
+
+    .venv\Scripts\Activate.ps1
+
+    (You should see (.venv) at the beginning of your terminal prompt)
+
+
+============================================================
+  STEP 3: Install Python Dependencies
+============================================================
+
+    pip install -r requirements.txt
+
+    This installs: fastapi, uvicorn, sentence-transformers, faiss-cpu,
+    google-generativeai, beautifulsoup4, python-dotenv, pydantic, etc.
+
+
+============================================================
+  STEP 4: Install Node.js Dependencies
+============================================================
+
+    npm install
+
+    This installs: express, http-proxy-middleware
+
+
+============================================================
+  STEP 5: Create .env File (IMPORTANT — Required for chatbot to work)
+============================================================
+
+    Create a file named ".env" in the project root folder:
+    Path: c:\Users\obban\OneDrive\Desktop\chatbot\.env
+
+    Contents of .env file:
+    -----------------------------------------------
+    GROQ_API_KEY=your_groq_api_key_here
+    -----------------------------------------------
+
+    Get your free API key from: https://console.groq.com/keys
+    1. Sign up / Log in at https://console.groq.com
+    2. Go to "API Keys" section
+    3. Create a new key and paste it in the .env file
+
+
+============================================================
+  STEP 6: Run the Data Pipeline (Only needed FIRST TIME)
+============================================================
+
+    Path: c:\Users\obban\OneDrive\Desktop\chatbot
+    Command:
+
+        python run_pipeline.py
+
+    This does 3 things:
+      - Scrapes college website data
+      - Processes and cleans the text
+      - Generates embeddings and builds the vector database
+
+    NOTE: If vector_db folder already has faiss_index.bin and
+          chunks_metadata.pkl, you can SKIP this step.
+
+
+============================================================
+  STEP 7: Start Python Backend API (Terminal 1)
+============================================================
+
+    Path: c:\Users\obban\OneDrive\Desktop\chatbot\backend
+    Commands:
+
+        cd backend
+        python api.py
+
+    This starts the FastAPI server on: http://127.0.0.1:5000
+    Keep this terminal OPEN and RUNNING.
+
+
+============================================================
+  STEP 8: Start Node.js Frontend Server (Terminal 2)
+============================================================
+
+    Open a NEW/SECOND terminal, then:
+
+    Path: c:\Users\obban\OneDrive\Desktop\chatbot
+    Commands:
+
+        cd c:\Users\obban\OneDrive\Desktop\chatbot
+        .venv\Scripts\Activate.ps1
+        npm start
+
+    This starts the Express server on: http://localhost:3000
+    Keep this terminal OPEN and RUNNING.
+
+
+============================================================
+  STEP 9: Open the Chatbot
+============================================================
+
+    Open your browser and go to:
+
+        http://localhost:3000
+
+    You can now ask questions like:
+      - "What is BVRIT?"
+      - "Who is the HOD of CSE AI ML department?"
+      - "Who are the faculty of CSE AI ML department?"
+      - "What is the fee structure?"
+
+
+============================================================
+  QUICK REFERENCE — All Commands in Order
+============================================================
+
+    # Terminal 1 (Python Backend):
+    cd c:\Users\obban\OneDrive\Desktop\chatbot
+    .venv\Scripts\Activate.ps1
+    pip install -r requirements.txt          (first time only)
+    cd backend
+    python api.py
+
+    # Terminal 2 (Node Frontend):
+    cd c:\Users\obban\OneDrive\Desktop\chatbot
+    .venv\Scripts\Activate.ps1
+    npm install                              (first time only)
+    npm start
+
+    # Browser:
+    http://localhost:3000
+
+
+============================================================
+  PROJECT STRUCTURE
+============================================================
+
+    chatbot/
+    ├── .env                    <-- You create this (GROQ_API_KEY)
+    ├── requirements.txt        <-- Python dependencies
+    ├── package.json            <-- Node.js dependencies
+    ├── run_pipeline.py         <-- Data pipeline (run once)
+    ├── backend/
+    │   ├── api.py              <-- Python FastAPI backend (port 5000)
+    │   └── server.js           <-- Node.js Express server (port 3000)
+    ├── frontend/
+    │   ├── index.html          <-- Chat UI
+    │   ├── script.js           <-- Frontend logic
+    │   └── style.css           <-- Styles
+    ├── scraper/                <-- Web scraper module
+    ├── processing/             <-- Text cleaning module
+    ├── embeddings/             <-- Embedding generation module
+    ├── llm/                    <-- LLM query module (Groq/Llama)
+    ├── vector_db/              <-- FAISS index + metadata (auto-generated)
+    └── data/                   <-- Scraped data files
+
+
+============================================================
+  TROUBLESHOOTING
+============================================================
+
+    Problem: "ModuleNotFoundError: No module named 'fastapi'"
+    Fix:     pip install -r requirements.txt
+
+    Problem: "Groq API key not configured"
+    Fix:     Create .env file in project root with GROQ_API_KEY
+
+    Problem: "Vector database not found"
+    Fix:     python run_pipeline.py
+
+    Problem: "Python backend is not running" (on frontend)
+    Fix:     Make sure python api.py is running in Terminal 1
+
+    Problem: Cannot access http://localhost:3000
+    Fix:     Make sure npm start is running in Terminal 2
+
+
+============================================================
+  PORTS USED
+============================================================
+
+    Port 5000 — Python FastAPI Backend (api.py)
+    Port 3000 — Node.js Express Frontend (server.js)
+
+    Both must be running at the same time for the chatbot to work.
+
+============================================================
